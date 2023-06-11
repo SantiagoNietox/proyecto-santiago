@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.plantilla')
 
-@section('content')
+@section('contenido')
 
   <title>AdminLTE 3 | Dashboard 2</title>
 

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\FrontController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\productosController;
+use App\Http\Controllers\CategoriaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,15 +20,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
+
 
 //Route::get('/administrativo',[App\Http\Controllers\FrontController::class,'index'])->name('administrativo');
 
-Route::resource('producto', FrontController::class)->names('productos');
-
-Auth::routes();
-
+//Route::resource('producto', FrontController::class)->names('productos');
+Route::resource('/productos', productosController::class)->names('productos');
+Route::resource('/categorias',CategoriaController::class)->names('categorias');
