@@ -1,25 +1,35 @@
-@extends('home')
+@extends('layouts.plantilla')
 @section('contenido')
 
 <div class="container">
-    <div class="row">
-        <div class="col">
-            <form action="{{route('productos.store')}}" method="POST">
-                @csrf
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" name="nombre" required>
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Precio</label>
-                    <input type="number" class="form-control" name="precio" required>
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Cantidad</label>
-                    <input type="number" class="form-control" name="cantidad" required >
-                  </div>
-                  <button type="submit" class="btn btn-primary">Enviar</button>
-            </form>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Crear Producto</div>
+                <div class="card-body">
+                    <form action="{{ route('productos.store') }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label for="id">ID:</label>
+                            <input type="text" class="form-control" name="id" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="nombre">Nombre:</label>
+                            <input type="text" class="form-control"  name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="precio">Precio:</label>
+                            <input type="number" class="form-control"  name="price" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cantidad">Cantidad:</label>
+                            <input type="number" class="form-control" name="amount" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>

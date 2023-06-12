@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Producto;
 use Illuminate\Http\Request;
 
 class productosController extends Controller
@@ -12,7 +13,9 @@ class productosController extends Controller
     public function index()
     {
 
-        return view('productos.index');
+        $registros = Producto::where('state',1)->get();
+        return view('productos.index',compact('registros'));
+
     }
 
     /**
@@ -20,15 +23,29 @@ class productosController extends Controller
      */
     public function create()
     {
-        return view('layouts.create');
+        return view('productos.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
+{
+    $request->validate([
+        'name' => 'required',
+        'price' => 'required',
+        'amount' => 'required',
+    ]);
+
+
+        $Productos=new Producto();
+        $Productos ->name=$request->name;
+        $Productos->price=$request->price;
+        $Productos->amount=$request->amount;
+        $Productos->state=1;
+        $Productos->save();
+
+            return redirect(route('productos.index'))->with('success', 'El registro se ha creado exitosamente.');
     }
 
     /**
@@ -60,6 +77,16 @@ class productosController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $registros = Producto::find($id);
+
+
+        if ($registros) {
+            $registros->state = 0;
+            $registros->save();
+
+            return redirect()->route('productos.index');
+        }
+
+        return redirect()->route('products.index');
     }
 }
