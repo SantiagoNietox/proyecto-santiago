@@ -232,7 +232,9 @@
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
+
 <!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script  src="{{ asset('js/jquery.min.js')}}"></script>
 <!-- Bootstrap -->
 <script src="{{ asset('js/bootstrap.bundle.min.js')}}"></script>
@@ -258,10 +260,9 @@
 <script src="{{ asset('js/Chart.min.js')}}"></script>
 
 <!-- AdminLTE for demo purposes -->
-<script src="{{ asset('js/demo.js')}}"></script>
 
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('js/dashboard2.js')}}"></script>
-
+@yield('scripts')
 </body>
 </html>

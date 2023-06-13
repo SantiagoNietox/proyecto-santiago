@@ -17,20 +17,17 @@
                         <p>Producto</p>
                     </a>
                 </li>
-                <li class="nav-item {{ Request::is('categorias*') ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ Request::is('categorias*') ? 'active' : '' }}">
+                <li class="nav-item">
+                    <a href="{{route('categorias.index')}}" class="nav-link {{ Request::is('categorias*') ? 'active' : '' }}">
                         <i class="far {{ Request::is('categorias*') ? 'fa-dot-circle' : 'fa-circle' }} nav-icon"></i>
                         <p>Categorías</p>
-                        <i class="right fas fa-angle-left"></i>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link {{ Request::is('subcategorias*') ? 'active' : '' }}">
-                                <i class="far {{ Request::is('subcategorias*') ? 'fa-dot-circle' : 'fa-circle' }} nav-icon"></i>
-                                <p>Subcategoría</p>
-                            </a>
-                        </li>
-                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route ('subcategorias.index')}}" class="nav-link {{ Request::is('subcategorias*') ? 'active' : '' }}">
+                        <i class="far {{ Request::is('subcategorias*') ? 'fa-dot-circle' : 'fa-circle' }} nav-icon"></i>
+                        <p>Subcategorías</p>
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link {{ Request::is('roles*') ? 'active' : '' }}">

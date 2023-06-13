@@ -4,6 +4,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\productosController;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\SubcategoriaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +31,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('/productos', productosController::class)->names('productos');
 Route::resource('/categorias',CategoriaController::class)->names('categorias');
-
+Route::resource('/subcategorias',SubcategoriaController::class)->names('subcategorias');
 Auth::routes();
 
 

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use App\Models\Subcategoria;
 
 class productosController extends Controller
 {
@@ -13,8 +15,13 @@ class productosController extends Controller
     public function index()
     {
 
-        $registros = Producto::where('state',1)->get();
-        return view('productos.index',compact('registros'));
+
+
+        $registros = Producto::select('c.name as cname', 'sub.name as subname', 'productos.*')
+            ->join('categoria as c', 'productos.categoria_id', 'c.id')
+            ->join('Subcategorias as sub', 'productos.subcategoria_id', 'sub.id')
+            ->where('productos.state', 1)->get();
+        return view('productos.index', compact('registros'));
 
     }
 
@@ -23,29 +30,33 @@ class productosController extends Controller
      */
     public function create()
     {
-        return view('productos.create');
+        $subcategoria = Subcategoria::where('state', 1)->get();
+        $categoria = Categoria::where('categoria.state', 1)->get();
+        return view('productos.create', compact('categoria', 'subcategoria'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
-    $request->validate([
-        'name' => 'required',
-        'price' => 'required',
-        'amount' => 'required',
-    ]);
+    {
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'amount' => 'required',
+        ]);
 
 
-        $Productos=new Producto();
-        $Productos ->name=$request->name;
-        $Productos->price=$request->price;
-        $Productos->amount=$request->amount;
-        $Productos->state=1;
+        $Productos = new Producto();
+        $Productos->name = $request->name;
+        $Productos->price = $request->price;
+        $Productos->amount = $request->amount;
+        $Productos->subcategoria_id = $request->subcategoria_id;
+        $Productos->categoria_id = $request->categoria_id;
+        $Productos->state = 1;
         $Productos->save();
 
-            return redirect(route('productos.index'))->with('success', 'El registro se ha creado exitosamente.');
+        return redirect(route('productos.index'))->with('success', 'El registro se ha creado exitosamente.');
     }
 
     /**
@@ -61,7 +72,7 @@ class productosController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('productos.edit', ['producto' => Producto::findOrFail($id)]);
     }
 
     /**
@@ -69,7 +80,14 @@ class productosController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $registros = Producto::findOrFail($id);
+        $registros->name = $request->name;
+        $registros->price = $request->price;
+        $registros->amount = $request->amount;
+
+        $registros->update();
+
+        return redirect(route('productos.index'));
     }
 
     /**

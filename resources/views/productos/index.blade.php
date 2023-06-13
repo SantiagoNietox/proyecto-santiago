@@ -1,52 +1,54 @@
 @extends('layouts.plantilla')
-@section('contenido')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                <table id="productos-table" class="table mt-3">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Precio</th>
-                            <th scope="col">Cantidad</th>
-                            <th scope="col">Categoria</th>
-                            <th scope="col">Acciones</th>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($registros as $registro)
+@section('contenido')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">Productos</div>
+                <div class="card-body">
+                    <table id="productos-table" class="table mt-3">
+                        <thead>
                             <tr>
-                                <th scope="row">{{ $loop->iteration }}</th>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Categoría</th>
+                                <th scope="col">Subcategoria</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($registros as $registro)
+                            <tr>
+                                <td>{{ $registro->id }}</td>
                                 <td>{{ $registro->name }}</td>
                                 <td>{{ $registro->price }}</td>
                                 <td>{{ $registro->amount }}</td>
-                                <td> </td>
+                                <td>{{ $registro->cname }}</td>
+                                <td>{{ $registro->subname }}</td>
                                 <td>
-                                    <a href="{{route('productos.edit', $registro ->id)}}" class="btn btn-sm btn-primary">Editar</a>
+                                    <a href="{{ route('productos.edit', $registro->id) }}" class="btn btn-sm btn-primary">Editar</a>
 
-
-
-
-                                    <form action="{{ route('productos.destroy', $registro->id) }}" method="POST"
-                                        class="d-inline">
+                                    <form action="{{ route('productos.destroy', $registro->id) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
                                     </form>
                                 </td>
                             </tr>
-                        @endforeach
-
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-12 text-center">
-                <a href="{{ route('productos.create') }}" class="btn btn-primary">Crear Producto</a>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-@stop
+    <div class="row justify-content-center">
+        <div class="col-md-12 text-center">
+            <a href="{{ route('productos.create') }}" class="btn btn-primary">Crear Producto</a>
+        </div>
+    </div>
+</div>
+@endsection
