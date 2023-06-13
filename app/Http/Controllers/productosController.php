@@ -19,7 +19,7 @@ class productosController extends Controller
 
         $registros = Producto::select('c.name as cname', 'sub.name as subname', 'productos.*')
             ->join('categoria as c', 'productos.categoria_id', 'c.id')
-            ->join('Subcategorias as sub', 'productos.subcategoria_id', 'sub.id')
+            ->join('Subcategorias as sub', 'productos.subcategorias_id', 'sub.id')
             ->where('productos.state', 1)->get();
         return view('productos.index', compact('registros'));
 
@@ -46,12 +46,11 @@ class productosController extends Controller
             'amount' => 'required',
         ]);
 
-
         $Productos = new Producto();
         $Productos->name = $request->name;
         $Productos->price = $request->price;
         $Productos->amount = $request->amount;
-        $Productos->subcategoria_id = $request->subcategoria_id;
+        $Productos->subcategorias_id = $request->subcategoria_id;
         $Productos->categoria_id = $request->categoria_id;
         $Productos->state = 1;
         $Productos->save();
@@ -71,8 +70,11 @@ class productosController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
-        return view('productos.edit', ['producto' => Producto::findOrFail($id)]);
+
+    {   $categoria = Categoria::Where ('state', 1)->get(); 
+        $subcategoria = Subcategoria::Where ('state', 1)->get();
+        return view('productos.edit', ['producto' => Producto::findOrFail($id)], compact('categoria', 'subcategoria'));
+        
     }
 
     /**

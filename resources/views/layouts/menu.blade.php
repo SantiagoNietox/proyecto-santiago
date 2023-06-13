@@ -29,14 +29,17 @@
                         <p>Subcategorías</p>
                     </a>
                 </li>
+                
+                @role ('admin')
                 <li class="nav-item">
-                    <a href="#" class="nav-link {{ Request::is('roles*') ? 'active' : '' }}">
+                    <a href="{{route('usuarios.index')}}" class="nav-link">
                         <i class="far {{ Request::is('roles*') ? 'fa-dot-circle' : 'fa-circle' }} nav-icon"></i>
-                        <p>Roles</p>
+                        <p>Usuarios</p>
                     </a>
                 </li>
             </ul>
         </li>
+       @endrole
 
         <li class="nav-item">
             <ul class="nav nav-treeview">
@@ -46,7 +49,6 @@
                         <p>Top Navigation</p>
                     </a>
                 </li>
-                <!-- Agrega aquí los demás enlaces del menú -->
             </ul>
         </li>
     </ul>

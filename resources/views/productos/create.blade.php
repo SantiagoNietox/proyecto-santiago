@@ -10,10 +10,6 @@
                     <form action="{{ route('productos.store') }}" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label for="id">ID:</label>
-                            <input type="text" class="form-control" name="id" readonly>
-                        </div>
-                        <div class="form-group">
                             <label for="nombre">Nombre:</label>
                             <input type="text" class="form-control" name="name" required>
                         </div>
