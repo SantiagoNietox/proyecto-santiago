@@ -23,7 +23,7 @@
                                 <td>{{ $usuario->id }}</td>
                                 <td>{{ $usuario->name }}</td>
                                 <td>{{ $usuario->email }}</td>
-                                <td>{{ $usuario->rol }}</td>
+                                <td>{{ $userRoles[$usuario->id] }}</td>
                                 
                                 <td>
                                     <a href="{{ route('usuarios.edit', $usuario->id) }}" class="btn btn-sm btn-primary">Editar</a>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
+
 
 class UsuariosController extends Controller
 {
@@ -12,10 +14,17 @@ class UsuariosController extends Controller
      */
     public function index()
     {
-        $usuarios =User::all();
-        return view ('usuarios.index',compact('usuarios'));
+        $usuarios = User::all();
+    
+        $userRoles = [];
+        foreach ($usuarios as $usuario) {
+            $roleName = $usuario->roles()->pluck('name')->first();
+            $userRoles[$usuario->id] = $roleName;
+        }
+    
+        return view('usuarios.index', compact('usuarios', 'userRoles'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */
