@@ -253,7 +253,7 @@
 
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ asset('js/dashboard2.js')}}"></script>
-    @vite(['./resources/js/app.js'])
+    @vite(['resources/js/app.js'])
     @yield('scripts')
 </body>
 

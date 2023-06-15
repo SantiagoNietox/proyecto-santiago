@@ -21,7 +21,7 @@
                             <tbody>
                                 @foreach ($subcategorias as $subcategoria)
                                     <tr>
-                                     @role ('admin')   
+                                     @role ('admin')
                                     <th scope="row">{{ $subcategoria->id }}</th>
                                     @endrole
                                         <td>{{ $subcategoria->name }}</td>

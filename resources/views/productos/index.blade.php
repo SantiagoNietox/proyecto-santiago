@@ -34,7 +34,7 @@
                                 <td>{{ $registro->amount }}</td>
                                 <td>{{ $registro->cname }}</td>
                                 <td>{{ $registro->subname }}</td>
-                                
+
                                 <td>
                                     @role ('admin')
                                     <a href="{{ route('productos.edit', $registro->id) }}" class="btn btn-sm btn-primary">Editar</a>
