@@ -15,16 +15,16 @@ class UsuariosController extends Controller
     public function index()
     {
         $usuarios = User::all();
-    
+
         $userRoles = [];
         foreach ($usuarios as $usuario) {
             $roleName = $usuario->roles()->pluck('name')->first();
             $userRoles[$usuario->id] = $roleName;
         }
-    
+
         return view('usuarios.index', compact('usuarios', 'userRoles'));
     }
-    
+
     /**
      * Show the form for creating a new resource.
      */
@@ -54,7 +54,10 @@ class UsuariosController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $usuario = User::find($id);
+        $roles = Role::all();
+
+        return view('usuarios.edit', compact('usuario', 'roles'));
     }
 
     /**
@@ -62,7 +65,7 @@ class UsuariosController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
     }
 
     /**
@@ -70,6 +73,11 @@ class UsuariosController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
+        $usuario = User::find($id);
+        $usuario->delete();
+
+        return redirect(route('usuarios.index'));
+
     }
 }
