@@ -7,40 +7,30 @@
             <div class="card">
                 <div class="card-header">Usuarios</div>
                 <div class="card-body">
-                    <table id="productos-table" class="table mt-3">
-                        <thead>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Correo</th>
-                                <th scope="col">Rol</th>
-                                <th scope="col">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($usuarios as $usuario)
-                            <tr>
-                                <td>{{ $usuario->id }}</td>
-                                <td>{{ $usuario->name }}</td>
-                                <td>{{ $usuario->email }}</td>
-                                <td>{{ $userRoles[$usuario->id] }}</td>
-                                
-                                <td>
-                                    <a href="{{ route('usuarios.edit', $usuario->id) }}" class="btn btn-sm btn-primary">Editar</a>
-
+                    <div class="row">
+                        @foreach ($usuarios as $usuario)
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <img src="{{ asset('storage/' . $usuario->profile_picture) }}" class="card-img-top" alt="Profile Picture">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $usuario->name }}</h5>
+                                    <p class="card-text">ID: {{ $usuario->id }}</p>
+                                    <p class="card-text">Rol: {{ $userRoles[$usuario->id] }}</p>
+                                    <a href="{{ route('usuarios.edit', $usuario->id) }}" class="btn btn-primary">Editar</a>
                                     <form action="{{ route('usuarios.destroy', $usuario->id) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
                                     </form>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 @endsection
