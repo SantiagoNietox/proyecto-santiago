@@ -11,7 +11,7 @@
                         @foreach ($usuarios as $usuario)
                         <div class="col-md-4 mb-4">
                             <div class="card">
-                                <img src="{{ asset('storage/' . $usuario->profile_picture) }}" class="card-img-top" alt="Profile Picture">
+                                <img src="{{$usuario -> file}}" class="card-img-top" alt="Profile Picture"  width = '200px'   height= '200px'>
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $usuario->name }}</h5>
                                     <p class="card-text">ID: {{ $usuario->id }}</p>

@@ -16,6 +16,8 @@ class UsuariosController extends Controller
     {
         $usuarios = User::all();
 
+        
+
         $userRoles = [];
         foreach ($usuarios as $usuario) {
             $roleName = $usuario->roles()->pluck('name')->first();

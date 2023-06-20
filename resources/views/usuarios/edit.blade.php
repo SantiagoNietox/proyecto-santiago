@@ -29,7 +29,10 @@
                                     @endforeach
                                 </select>
                             </div>
-
+                            <div class="form-group">
+                            <label for="foto">Foto de perfil:</label>
+                            <input id="foto" type="file" class="form-control" name="file" accept="image/*" >
+                        </div>
                             <button type="submit" class="btn btn-primary">Editar</button>
                         </form>
                     </div>
