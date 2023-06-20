@@ -36,4 +36,9 @@ Route::resource('/subcategorias',SubcategoriaController::class)->names('subcateg
 Route::resource('/usuarios',UsuariosController::class)->names('usuarios');
 
 
+Route::get('/home/movies.html', function () {
+    return view('home.movies');
+});
+
+
 
