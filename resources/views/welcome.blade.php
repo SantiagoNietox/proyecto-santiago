@@ -58,7 +58,7 @@
                 <a class="nav-link" href="index.html">Inicio</a>
              </li>
              <li class="nav-item">
-                <a class="nav-link" href="{{ url('home/movies.html') }}">Productos</a>
+                <a class="nav-link" href="{{ url('home/mov++ies.html') }}">Productos</a>
              </li>
              <li class="nav-item">
                 <a class="nav-link" href="tv.html">TV</a>

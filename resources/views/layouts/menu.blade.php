@@ -6,7 +6,7 @@
             <a href="#" class="nav-link active">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
-                    Productos
+                    Menu
                     <i class="right fas fa-angle-left"></i>
                 </p>
             </a>

@@ -10,6 +10,9 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{{ asset('css/all.min.css')}}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.css">
+
+  @yield('css')
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="{{ asset('css/OverlayScrollbars.min.css')}}">
   <!-- Theme style -->
@@ -121,13 +124,13 @@
           </a>
         <li class="nav-item dropdown">
           <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-            {{ Auth::user()->name }}
+           Cerrar sesion
           </a>
 
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-              {{ __('Logout') }}
+              {{ __('Cerrar') }}
             </a>
 
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -163,13 +166,19 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
+
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ asset('img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+            @auth
+                @if (Auth::user()->file)
+                    <img src="{{ asset(Auth::user()->file) }}" class="img-circle elevation-2" alt="User Image">
+                @else
+                    <img src="{{ asset('img/default-profile-image.jpg') }}" class="img-circle elevation-2" alt="Default User Image">
+                @endif
+            @endauth
         </div>
         <div class="info">
-          <a href="#" class="d-block">Santiago Nieto</a>
+          <a href="#" class="d-block">{{ Auth::user()->name }}</a>
         </div>
       </div>
 
@@ -226,6 +235,7 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="{{ asset('js/jquery.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
     <!-- Bootstrap -->
     <script src="{{ asset('js/bootstrap.bundle.min.js')}}"></script>
 
@@ -245,6 +255,8 @@
     <script src="{{ asset('js/jquery.mapael.min.js')}}"></script>
 
     <script src="{{ asset('js/usa_states.min.js')}}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
 
     <!-- ChartJS -->
     <script src="{{ asset('js/Chart.min.js')}}"></script>
@@ -252,9 +264,13 @@
     <!-- AdminLTE for demo purposes -->
 
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="{{ asset('js/dashboard2.js')}}"></script>
+
     @vite(['resources/js/app.js'])
+
+
     @yield('scripts')
+
 </body>
+
 
 </html>

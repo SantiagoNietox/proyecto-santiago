@@ -6,6 +6,8 @@ use App\Models\Categoria;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use App\Models\Subcategoria;
+use Illuminate\Support\Facades\Session;
+
 
 class productosController extends Controller
 {
@@ -44,7 +46,13 @@ class productosController extends Controller
             'name' => 'required',
             'price' => 'required',
             'amount' => 'required',
+            'categoria_id' => 'required',
+            'subcategoria_id' => 'required',
+            'imagen' => 'required|image',
         ]);
+        $name = $request['imagen'] ->getClientOriginalName();
+        $destino = 'images/productos';
+        $imageName = $request['imagen']-> move($destino, $name);
 
         $Productos = new Producto();
         $Productos->name = $request->name;
@@ -53,6 +61,7 @@ class productosController extends Controller
         $Productos->subcategorias_id = $request->subcategoria_id;
         $Productos->categoria_id = $request->categoria_id;
         $Productos->state = 1;
+        $Productos->imagen = $imageName;
         $Productos->save();
 
         return redirect(route('productos.index'))->with('success', 'El registro se ha creado exitosamente.');
@@ -71,10 +80,10 @@ class productosController extends Controller
      */
     public function edit(string $id)
 
-    {   $categoria = Categoria::Where ('state', 1)->get(); 
+    {   $categoria = Categoria::Where ('state', 1)->get();
         $subcategoria = Subcategoria::Where ('state', 1)->get();
         return view('productos.edit', ['producto' => Producto::findOrFail($id)], compact('categoria', 'subcategoria'));
-        
+
     }
 
     /**

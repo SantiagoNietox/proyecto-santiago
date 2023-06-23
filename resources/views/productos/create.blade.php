@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">Crear Producto</div>
                 <div class="card-body">
-                    <form action="{{ route('productos.store') }}" method="POST">
+                    <form action="{{ route('productos.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="nombre">Nombre:</label>
@@ -31,13 +31,17 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="subategoria">Subcategoría:</label>
+                            <label for="subcategoria">Subcategoría:</label>
                             <select class="form-control" name="subcategoria_id" required>
                                 <option value="">Seleccione una categoría</option>
                                 @foreach ($subcategoria as $subcategorias)
                                     <option value="{{ $subcategorias->id }}"> {{ $subcategorias->name }} </option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="imagen">Imagen:</label>
+                            <input type="file" class="form-control" name="imagen" accept="image/*" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Enviar</button>
                     </form>
