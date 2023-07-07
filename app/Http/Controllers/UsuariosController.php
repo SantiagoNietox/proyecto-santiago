@@ -12,6 +12,31 @@ class UsuariosController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+
+     public function __construct ()
+     {
+        
+        
+        
+       
+        $this->middleware('can:usuarios.index')->only('index') ;
+        $this->middleware('can:usuarios.edit')->only('edit', 'update') ;
+        $this->middleware('can:usuarios.destroy')->only('destroy') ;
+     }
+ 
+
+
+
+
+
+
+
+
+
+
+
+
     public function index()
     {
         $usuarios = User::all();

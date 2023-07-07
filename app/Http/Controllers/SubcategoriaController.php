@@ -12,6 +12,21 @@ class SubcategoriaController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+
+     public function __construct ()
+     {
+ 
+         $this->middleware('can:usuarios.edit')->only('edit') ;
+         $this->middleware('can:usuarios.edit')->only('edit', 'update') ;
+         $this->middleware('can:usuarios.destroy')->only('destroy') ;
+     }
+
+
+
+
+
+
     public function index()
     {
         $subcategorias = Subcategoria::select('c.name as cname', 'subcategorias.*')
